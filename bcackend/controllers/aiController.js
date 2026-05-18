@@ -1,21 +1,53 @@
-import express, { Router } from 'express';
-import{
-    getAllFlashcardSets,
-    generateQuiz,
-    generateSummary,
-    chat,
-    explainConcept,
-    getChatHistory
-} from '../controllers/aiController.js'
-import protect from '../middleware/auth.js';
+import Document from "../models/Document.js";
+import Flashcard from "../models/Flashcard.js";
+import Quiz from "../models/Quize.js";
+import chatHistory from "../models/ChatHistory.js";
+import * as geminiservice from "../utils/geminiService.js";
 
-const router = express.Router();
+export const generateFlashcards = async (req, res,next) => {
+    try{
+    }catch(error){
+        next(error);
+    }
+    
+};
+export const generateQuiz = async (req, res,next) => {
+    try{
 
-router.use(protect);
-router.post('/generate-flashcards',generateFlashcards);
-router.post('/generate-quiz',generateQuiz);
-router.post('/generate-summary',generateSummary);
-router.post('/chat',chat);
-router.post('/explain-concept',explainConcept);
-router.get('/get-chat-history',getChatHistory);
-export default router;
+    }catch(error){
+        next(error);
+    }
+};
+
+export const generateSummary = async (req, res,next) => {
+      try{
+
+    }catch(error){
+        next(error);
+    }
+    
+};
+
+export const chat= async (req, res,next) => {
+    try{
+
+    }catch(error){
+        next(error);
+    }
+}
+export const explainConcept = async (req, res,next) => {
+    try{
+
+    }catch(error){
+        next(error);
+    }
+};
+export const getChatHistory = async (req, res,next) => {
+    try{
+
+    }catch(error){
+        next(error);
+    } 
+};
+
+
