@@ -208,7 +208,7 @@ export const deleteDocument = async (req, res, next) => {
       });
     }
 
-    // delete file
+    
     await fs.unlink(document.filePath).catch(() => {});
 
     await document.deleteOne();
