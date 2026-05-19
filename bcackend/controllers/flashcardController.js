@@ -1,10 +1,10 @@
 import Flashcard from "../models/Flashcard.js";
 
-export const createFlashcard = async (req, res) => {
+export const getFlashcards = async (req, res, next) => {
     try{
         const flashcards=await Flashcard.find({
             userId:req.user._id,
-            documentId:req.body.documentId
+            documentId:req.params.documentId
         })
         .populate('documentId', 'title fileName')
         .sort({createdAt:-1});

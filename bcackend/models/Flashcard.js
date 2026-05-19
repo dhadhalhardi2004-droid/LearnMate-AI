@@ -14,7 +14,7 @@ const FlashcardSchema = new mongoose.Schema({
     },
     cards:  [
         {
-            qestions:{type: String, required: true},
+            question:{type: String, required: true},
             answer:{type: String, required: true},
             difficulty:{
                 type: String,
@@ -31,7 +31,7 @@ const FlashcardSchema = new mongoose.Schema({
                 default: 0,
 
             },
-            isstarred:{
+            isStarred:{
                 type: Boolean,
                 default: false
             },

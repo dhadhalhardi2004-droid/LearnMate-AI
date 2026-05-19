@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
 import{
-    getAllFlashcardSets,
+    generateFlashcards,
     generateQuiz,
     generateSummary,
     chat,

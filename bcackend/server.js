@@ -9,6 +9,10 @@ import connectDB from './config/db.js';
 import errorHandler from './middleware/errorHandler.js';
 import authRoutes from './routes/authRoutes.js';
 import DocumentRoutes from './routes/documentRoutes.js';
+import FlashcardRoutes from './routes/flashcardRoutes.js';
+import aiRoutes from './routes/aiRoutes.js';
+import quizRoutes from './routes/quizRoutes.js';
+import progressRoutes from './routes/progressRoutes.js';
 // Debug (optional)
 console.log("MONGO_URI 👉", process.env.MONGO_URI);
 
@@ -42,6 +46,12 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // ✅ Root route (test)
 app.use('/api/auth', authRoutes);
 app.use('/api/documents', DocumentRoutes);
+app.use('/api/flashcards', FlashcardRoutes);
+app.use('/api/ai', aiRoutes);
+app.use('/api/quizzes', quizRoutes);
+app.use('/api/progress', progressRoutes);
+
+
 app.get("/", (req, res) => {
     res.send("Backend is running ✅");
 });

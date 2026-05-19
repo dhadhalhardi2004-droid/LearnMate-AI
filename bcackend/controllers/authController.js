@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import user from '../models/user.js';
+import User from '../models/user.js';
 
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -10,7 +10,7 @@ const generateToken = (id) => {
 export const register = async (req, res,next) => {
     try{
         const {username,email,password} = req.body;
-        const userExists = await user.findOne({$or :[{email}]});
+        const userExists = await User.findOne({$or :[{email}, {username}]});
         if(userExists){
             return res.status(400).json({
                 success:false,
@@ -66,7 +66,7 @@ export const login = async (req, res,next) => {
             
         });
     }
-    const isMatch = await user.matchPassword(password);
+    const isMatch = await user.comparePassword(password);
     if(!isMatch){
         return res.status(400).json({
             success:false,
@@ -75,7 +75,7 @@ export const login = async (req, res,next) => {
         });
 
     }
-    const token = user.getSignedToken(user._id);
+    const token = generateToken(user._id);
     res.status(200).json({
         success:true,
         user:{

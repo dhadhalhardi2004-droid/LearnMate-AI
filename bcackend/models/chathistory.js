@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 
 const chathistorySchema = new mongoose.Schema({
     userId: {
-        type:mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
     },
     documentId: {
-        type:mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Document",
         required: true,
     },
@@ -25,15 +25,15 @@ const chathistorySchema = new mongoose.Schema({
             type: Date,
             default: Date.now,
         },
-        relevantChunks:{
-            type:Number,
-            default:0
-        }
-    }],
-    timestamp:true
+        relevantChunks: [{
+            type: Number
+        }]
+    }]
+}, {
+    timestamps: true
 });
 
-chathistorySchema.index({userId: 1, documentId: 1});
+chathistorySchema.index({ userId: 1, documentId: 1 });
 
 const ChatHistory = mongoose.model("ChatHistory", chathistorySchema);
 export default ChatHistory;

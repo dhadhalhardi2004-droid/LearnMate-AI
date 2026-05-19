@@ -20,23 +20,23 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a password"],
         minlength: [6, "Password must be at least 6 characters"],
-        selection: false,
+        select: false,
     },
     profileImage: {
         type: String,
         default:null
-    },
-        timeseries:true
-    });
+    }
+}, {
+    timestamps: true
+});
 
-    UserSchema.pro("save",async function(next) {
+    UserSchema.pre("save", async function() {
         if (!this.isModified("password")) {
-             next();
+             return;
         }
         const salt = await bcrypt.genSalt(10);
         this.password = await bcrypt.hash(this.password, salt);
-        
-    }) ;
+    });
     UserSchema.methods.comparePassword = async function (enteredPassword) {
         return await bcrypt.compare(enteredPassword, this.password);
     };

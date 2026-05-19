@@ -1,17 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 import LoginPage from './pages/Auth/LoginPage';
 import RegisterPage from './pages/Auth/RegisterPage';
+import DashboardPage from './pages/Dashboard/DashboardPage';
 import DocumentListPage from './pages/Documents/DocumentListPage';
+import DocumentsDetailPage from './pages/Documents/DocumentsDetailPage';
 import FlashcardPage from './pages/Flashcards/FlashcardPage';
 import FlashcardsListPage from './pages/Flashcards/FlashcardsListPage';
 import QuizResultPage from './pages/Quizzes/QuizResultPage';
 import ProfilePage from './pages/Profile/ProfilePage';
 
 const App = () => {
-  const isAuthenticated = false;
-  const loading = false;
+  const { isAuthenticated,loading } = useAuth();
+  
 
   if (loading) {
     return (
@@ -42,10 +46,10 @@ const App = () => {
         <Route element={<ProtectedRoute/>}>
         <Route path='/dashboard' element={<DashboardPage/>} />
         <Route path='/documents' element={<DocumentListPage/>}/>
-        <Route path='/documents/:id' element={<DocumentDetailPage/>}/>
+        <Route path='/documents/:id' element={<DocumentsDetailPage/>}/>
         <Route path='/flashcards' element={<FlashcardsListPage/>}/>
         <Route path='/documents/:id/flashcards' element={<QuizResultPage/>}/>
-        <Route path='quizzes/:id/flashcards' element={<QuizResultPage/>}/>
+        <Route path='/quizzes/:id/flashcards' element={<QuizResultPage/>}/>
         <Route path='/profile' element={<ProfilePage/>}/>
         </Route>
 

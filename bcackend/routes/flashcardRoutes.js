@@ -1,6 +1,6 @@
 import express from 'express';
 import { getFlashcards,
-     getAllFlashcardSets,
+     getFlashcardSets,
       reviewFlashcard,
        toggleStarFlashcard,
         deleteFlashcardSet } 
@@ -13,6 +13,6 @@ router.get('/', getFlashcardSets);
 router.get('/:documentId', getFlashcards);
 router.post('/:cardId/review', reviewFlashcard);
 router.post('/:cardId/star', toggleStarFlashcard);
-router.delete('/:Id', deleteFlashcardSet);
+router.delete('/:flashcardId', deleteFlashcardSet);
 
 export default router;
