@@ -1,4 +1,4 @@
-import axiosInstance from "../utils/axioslnstance.js";
+import axiosInstance from "../utils/axioslnstance";
 import { API_PATHS } from "../utils/apiPaths.js";
 
 // ==========================================

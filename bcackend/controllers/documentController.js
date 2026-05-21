@@ -5,6 +5,11 @@ import { chunkText } from "../utils/textChunker.js";
 import { extractTextFromPDF } from "../utils/pdfparser.js";
 import fs from "fs/promises";
 import mongoose from "mongoose";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /* ================= UPLOAD DOCUMENT ================= */
 export const uploadDocument = async (req, res, next) => {
@@ -26,8 +31,8 @@ export const uploadDocument = async (req, res, next) => {
       });
     }
 
-    const baseUrl = `http://localhost:${process.env.PORT || 5000}`;
-    const fileUrl = `${baseUrl}/uploads/${req.file.filename}`;
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
+    const fileUrl = `${baseUrl}/uploads/documents/${req.file.filename}`;
 
     const document = await Document.create({
       userId: req.user._id,
@@ -209,7 +214,11 @@ export const deleteDocument = async (req, res, next) => {
     }
 
     
-    await fs.unlink(document.filePath).catch(() => {});
+    const filename = document.filePath.split("/").pop();
+    const localPath = path.join(__dirname, "../uploads/documents", filename);
+    await fs.unlink(localPath).catch((err) => {
+      console.error("Failed to delete local document file:", err);
+    });
 
     await document.deleteOne();
 
